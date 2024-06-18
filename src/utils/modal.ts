@@ -26,13 +26,14 @@ export const getFocusableElements = (
 
 export const nextFocus = (elements: HTMLElement[], forward = true) => {
   const currentIndex = elements.findIndex((e) => e === document.activeElement);
+  const lastItemIndex = elements.length - 1;
   let nextIndex = 0;
 
   if (currentIndex > -1) {
     if (forward) {
-      nextIndex = currentIndex < elements.length - 1 ? currentIndex + 1 : 0;
+      nextIndex = currentIndex < lastItemIndex ? currentIndex + 1 : 0;
     } else {
-      nextIndex = currentIndex > 0 ? currentIndex - 1 : elements.length - 1;
+      nextIndex = currentIndex > 0 ? currentIndex - 1 : lastItemIndex;
     }
   }
 

@@ -4,9 +4,9 @@ import { Modal } from "./Modal";
 
 test("renders modal content", () => {
   render(
-    <Modal.Frame open={true} onClose={() => {}}>
+    <Modal open={true} onClose={() => {}}>
       <div>Modal Content</div>
-    </Modal.Frame>
+    </Modal>
   );
   const modalContent = screen.getByText(/Modal Content/i);
   expect(modalContent).toBeInTheDocument();
@@ -14,9 +14,9 @@ test("renders modal content", () => {
 
 test("does not render modal content when isOpen is false", () => {
   render(
-    <Modal.Frame open={false} onClose={() => {}}>
+    <Modal open={false} onClose={() => {}}>
       <div>Modal Content</div>
-    </Modal.Frame>
+    </Modal>
   );
   const modalContent = screen.queryByText(/Modal Content/i);
   expect(modalContent).toBeNull();
@@ -26,9 +26,9 @@ describe("Closing Modal", () => {
   test("Calls onClose when close button is clicked", () => {
     const onCloseMock = jest.fn();
     render(
-      <Modal.Frame open={true} onClose={onCloseMock}>
+      <Modal open={true} onClose={onCloseMock}>
         <div>Modal Content</div>
-      </Modal.Frame>
+      </Modal>
     );
     const closeButton = screen.getByTestId("modal-close-button");
     fireEvent.click(closeButton);
@@ -38,9 +38,9 @@ describe("Closing Modal", () => {
   test("Pressing the escape button closes the modal", () => {
     const onCloseMock = jest.fn();
     render(
-      <Modal.Frame open={true} onClose={onCloseMock}>
+      <Modal open={true} onClose={onCloseMock}>
         <div>Modal Content</div>
-      </Modal.Frame>
+      </Modal>
     );
     const modalContent = screen.getByText(/Modal Content/i);
     expect(modalContent).toBeInTheDocument();
@@ -52,9 +52,9 @@ describe("Closing Modal", () => {
   test("Clicking outside closes the modal", () => {
     const onCloseMock = jest.fn();
     render(
-      <Modal.Frame open={true} onClose={onCloseMock}>
+      <Modal open={true} onClose={onCloseMock}>
         <div>Modal Content</div>
-      </Modal.Frame>
+      </Modal>
     );
     const modalContent = screen.getByText(/Modal Content/i);
     expect(modalContent).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe("Closing Modal", () => {
 
 test("Focus is locked within the modal", () => {
   render(
-    <Modal.Frame open={true} onClose={() => {}}>
+    <Modal open={true} onClose={() => {}}>
       <div>Modal Content</div>
       <button data-testid="first-focusable-element">
         First Focusable Element
@@ -75,7 +75,7 @@ test("Focus is locked within the modal", () => {
       <button data-testid="last-focusable-element">
         Last Focusable Element
       </button>
-    </Modal.Frame>
+    </Modal>
   );
 
   const modalContent = screen.getByText(/Modal Content/i);

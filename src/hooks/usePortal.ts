@@ -6,7 +6,10 @@ export const usePortal = () => {
   useEffect(() => {
     const current = portal.current;
     document.body.appendChild(current);
-    return () => void document.body.removeChild(current);
+
+    return () => {
+      document.body.removeChild(current);
+    };
   }, []);
 
   return portal;

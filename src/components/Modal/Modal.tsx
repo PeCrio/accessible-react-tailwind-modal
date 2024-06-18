@@ -4,18 +4,18 @@ import ReactDOM from "react-dom";
 import { getFocusableElements, nextFocus } from "../../utils/modal";
 import { usePortal } from "../../hooks/usePortal";
 
-const Frame: React.FC<{
+export const Modal = ({
+  closeOnClickOutside = true,
+  children,
+  closeOnEsc = true,
+  onClose,
+  open = true,
+}: {
   closeOnClickOutside?: boolean;
   children: React.ReactNode;
   closeOnEsc?: boolean;
   onClose: () => void;
   open?: boolean;
-}> = ({
-  children,
-  closeOnClickOutside = true,
-  closeOnEsc = true,
-  onClose,
-  open = true,
 }) => {
   const portal = usePortal();
   const previousFocusedElementRef = useRef<HTMLElement | null>(null);
@@ -62,7 +62,7 @@ const Frame: React.FC<{
     if (open) {
       previousFocusedElementRef.current =
         (document.activeElement as HTMLElement) ?? null;
-      nextFocus(getFocusableElements(containerRef.current));
+      nextFocus(getFocusableElements(containerRef.current)); // focus the first focusable element
     } else {
       previousFocusedElementRef.current?.focus?.();
       previousFocusedElementRef.current = null;
@@ -103,14 +103,12 @@ const Frame: React.FC<{
   );
 };
 
-const Head: React.FC<PropsWithChildren> = ({ children }) => (
+Modal.Head = ({ children }: PropsWithChildren) => (
   <div aria-label="modal-title" className="block px-4 py-2 bg-gray-900">
     {children}
   </div>
 );
 
-const Body: React.FC<PropsWithChildren> = ({ children }) => (
+Modal.Body = ({ children }: PropsWithChildren) => (
   <div className="p-4">{children}</div>
 );
-
-export const Modal = { Frame, Head, Body };

@@ -26,11 +26,7 @@ function App() {
                 >
                   Click me
                 </button>
-                <Modal.Frame
-                  open={isOpen}
-                  onClose={closeModal}
-                  closeOnClickOutside
-                >
+                <Modal open={isOpen} onClose={closeModal} closeOnClickOutside>
                   <Modal.Head>
                     <h3 className="pt-4 pb-2 text-2xl">
                       <i>Send me a message</i>
@@ -59,7 +55,7 @@ function App() {
                       </div>
                     </div>
                   </Modal.Body>
-                </Modal.Frame>
+                </Modal>
               </div>
             </div>
           </div>
