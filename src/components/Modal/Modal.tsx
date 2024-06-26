@@ -26,7 +26,7 @@ export const Modal = ({
     if (!containerRef.current?.contains(e.target as Node)) onClose();
   };
 
-  // Hanlde keydown events for closing and focus switching
+  // Handle keydown events for closing and focus switching
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!open) return;
@@ -39,10 +39,9 @@ export const Modal = ({
         case "Tab": {
           e.preventDefault();
           const shiftKeyPressedToReverse = e.shiftKey;
-          nextFocus(
-            getFocusableElements(containerRef.current),
-            !shiftKeyPressedToReverse
-          );
+          const focusableElements = getFocusableElements(containerRef.current);
+
+          nextFocus(focusableElements, !shiftKeyPressedToReverse);
           break;
         }
       }
